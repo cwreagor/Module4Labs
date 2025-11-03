@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Artist Portfolio Gallery</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #fafafa;
+        margin: 20px;
+      }
+
+      .artist-card {
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 30px;
+        background-color: white;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .artist-card h2 {
+        color: #333;
+      }
+
+      .portfolio {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .portfolio-item {
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        text-align: center;
+        background-color: #f9f9f9;
+      }
+
+      .portfolio-item img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+
+      .portfolio-item p {
+        margin: 8px 0;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Artist Portfolios</h1>
+    <div id="gallery"></div>
+
+    <script>
+      const artists = [
+        {
+          name: "Van Gogh",
+          portfolio: [
+            {
+              title: "Portrait",
+              url: "https://collectionapi.metmuseum.org/api/collection/v1/iiif/436532/1671316/main-image",
+            },
+            {
+              title: "Sky",
+              url: "https://mymodernmet.com/wp/wp-content/uploads/2020/11/White-house-night-van-goh-worldwide-2.jpg",
+            },
+          ],
+        },
+        {
+          name: "Frida Kahlo",
+          portfolio: [
+            {
+              title: "The Persistence of Memory",
+              url: "https://uploads0.wikiart.org/00475/images/salvador-dali/w1siziisijm4njq3mcjdlfsiccisimnvbnzlcnqilcitcxvhbgl0esa5mcatcmvzaxplidiwmdb4mjawmfx1mdazzsjdxq.jpg!PinterestSmall.jpg",
+            },
+            {
+              title: "Fiesta in Figueres",
+              url: "https://uploads7.wikiart.org/images/salvador-dali/fiesta-in-figueres-1916.jpg!PinterestSmall.jpg",
+            },
+          ],
+        },
+        {
+          name: "Claude Monet",
+          portfolio: [
+            {
+              title: "Water Lilies",
+              url: "https://uploads6.wikiart.org/images/claude-monet/water-lilies-1919.jpg",
+            },
+            {
+              title: "Impression, Sunrise",
+              url: "https://uploads7.wikiart.org/images/claude-monet/impression-sunrise.jpg",
+            },
+          ],
+        },
+      ];
+
+      function addArtistCard(artist) {
+        const gallery = document.getElementById("gallery");
+
+        const artistCard = document.createElement("div");
+        artistCard.classList.add("artist-card");
+
+        const artistName = document.createElement("h2");
+        artistName.textContent = artist.name;
+
+        const portfolioContainer = document.createElement("div");
+        portfolioContainer.classList.add("portfolio");
+
+        artist.portfolio.forEach((item) => {
+          const portfolioItem = document.createElement("div");
+          portfolioItem.classList.add("portfolio-item");
+
+          portfolioItem.innerHTML = `
+            <img src="${item.url}" alt="${item.title}">
+            <p>${item.title}</p>
+          `;
+
+          portfolioContainer.appendChild(portfolioItem);
+        });
+
+        artistCard.appendChild(artistName);
+        artistCard.appendChild(portfolioContainer);
+        gallery.appendChild(artistCard);
+      }
+
+      artists.forEach(addArtistCard);
+    </script>
+  </body>
+</html>

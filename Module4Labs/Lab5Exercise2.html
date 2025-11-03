@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Feed</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+      .news-item {
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .news-item h2 {
+        margin: 0 0 5px;
+      }
+      .form-container {
+        margin: 20px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+      input,
+      textarea {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+      }
+      button {
+        padding: 8px 12px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Latest News</h1>
+
+    <div class="form-container">
+      <h3>Add a News Item</h3>
+      <input type="text" id="titleInput" placeholder="Enter news title" />
+      <textarea id="contentInput" placeholder="Enter news content"></textarea>
+      <button onclick="addNews()">Add News</button>
+      <button onclick="stopAutoRefresh()">Stop Auto Refresh</button>
+    </div>
+
+    <div id="news-container"></div>
+
+    <script>
+      let news = [
+        {
+          id: 1,
+          title: "Election Results",
+          content: "Newly elected minister...",
+        },
+        { id: 2, title: "Sporting Success", content: "World Cup winners..." },
+        {
+          id: 3,
+          title: "Tornado Warning",
+          content: "Residents should prepare...",
+        },
+      ];
+
+      const container = document.getElementById("news-container");
+
+      function renderNews() {
+        container.innerHTML = "";
+        news.forEach((item) => {
+          const div = document.createElement("div");
+          div.classList.add("news-item");
+          div.innerHTML = `
+            <h2>${item.title}</h2>
+            <p>${item.content}</p>
+          `;
+          container.appendChild(div);
+        });
+      }
+
+      renderNews();
+
+      let refreshInterval = setInterval(renderNews, 5000);
+
+      function addNews() {
+        const title = document.getElementById("titleInput").value.trim();
+        const content = document.getElementById("contentInput").value.trim();
+
+        if (title && content) {
+          const newItem = {
+            id: news.length + 1,
+            title: title,
+            content: content,
+          };
+          news.push(newItem);
+          document.getElementById("titleInput").value = "";
+          document.getElementById("contentInput").value = "";
+          renderNews();
+        } else {
+          alert("Please fill in both fields.");
+        }
+      }
+
+      // Extension:
+      function stopAutoRefresh() {
+        clearInterval(refreshInterval);
+        alert("Auto refresh stopped.");
+      }
+    </script>
+  </body>
+</html>

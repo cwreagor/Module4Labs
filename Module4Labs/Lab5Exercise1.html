@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Feed</title>
+  </head>
+  <body>
+    <h1>Latest News</h1>
+    <div id="news-container"></div>
+
+    <script>
+      let news = [
+        {
+          id: 1,
+          title: "Election Results",
+          content: "Newly elected minister...",
+        },
+        { id: 2, title: "Sporting Success",
+          content: "World Cup winners..." },
+        {
+          id: 3,
+          title: "Tornado Warning",
+          content: "Residents should prepare...",
+        },
+      ];
+
+      const container = document.getElementById("news-container");
+
+      function renderNews() {
+        container.innerHTML = "";
+
+        news.forEach((item) => {
+          const div = document.createElement("div");
+          div.classList.add("news-item");
+          div.innerHTML = `
+          <h2>${item.title}</h2>
+          <p>${item.content}</p>
+        `;
+          container.appendChild(div);
+        });
+      }
+
+      renderNews();
+
+      setInterval(() => {
+        renderNews();
+      }, 5000);
+    </script>
+  </body>
+</html>

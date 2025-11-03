@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+<script>
+  const { DateTime, Interval } = luxon;
+
+  // Exercise 1
+const birthDate = DateTime.fromFormat("04/28/1998", "MM/dd/yyyy");
+const today = DateTime.now();
+
+const diffInDays = today.diff(birthDate, 'days').days;
+console.log(`Days since birth: ${Math.floor(diffInDays)}`);
+
+// Exercise 2
+const diff = today.diff(birthDate, ['years', 'months', 'days']).toObject();
+console.log(`Years: ${Math.floor(diff.years)}, Months: ${Math.floor(diff.months)}, Days: ${Math.floor(diff.days)}`);
+
+
+// Exercise 3
+const date1 = DateTime.fromISO("2025-12-25");
+const date2 = DateTime.fromISO("2025-11-29");
+
+const closestDate = date1.diff(today).milliseconds < date2.diff(today).milliseconds ? date1 : date2;
+console.log(`Closest date to today: ${closestDate.toISODate()}`);
+
+
+// Exercise 4
+const firstDate = DateTime.fromISO("2025-05-15");
+const secondDate = DateTime.fromISO("2025-08-01");
+
+if (firstDate < secondDate) {
+  console.log("First date is before the second date");
+} else if (firstDate > secondDate) {
+  console.log("First date is after the second date");
+}
+
+
+// Exercise 5
+const londonTime = DateTime.now().setZone("Europe/London");
+console.log(`Current time in London: ${londonTime.toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS)}`);
+
+
+</script>

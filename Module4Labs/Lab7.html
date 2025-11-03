@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sliding Square</title>
+    <style>
+      .stage {
+        width: 200px;
+        height: 300px;
+        border: 2px solid #333;
+        position: relative;
+        overflow: hidden;
+        margin: 50px auto;
+      }
+
+      .square {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        background-color: red;
+        animation: slide 3s ease-in-out infinite;
+      }
+
+      @keyframes slide {
+        0% {
+          top: 0;
+          background-color: red;
+        }
+        50% {
+          top: calc(100% - 50px);
+          background-color: blue;
+        }
+        100% {
+          top: 0;
+          background-color: green;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <div class="square"></div>
+    </div>
+  </body>
+</html>
